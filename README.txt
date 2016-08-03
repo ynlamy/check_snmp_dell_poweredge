@@ -1,6 +1,6 @@
 This plugin can check the status of Dell PowerEdge server using SNMP v1 queries and Dell OpenManage.
 
-check_check_snmp_dell_poweredge is written in Bash and is distributed under the GPLv2 license. This plugin have been created by Yoann LAMY.
+check_snmp_dell_poweredge is written in Bash and is distributed under the GPLv2 license. This plugin have been created by Yoann LAMY.
 
 Usage:
 ./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t disk -d 1
