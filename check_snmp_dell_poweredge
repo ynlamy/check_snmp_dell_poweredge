@@ -2,7 +2,7 @@
 
 # check_snmp_dell_poweredge
 # Description : Check the status of Dell PowerEdge server
-# Version : 1.4
+# Version : 1.5
 # Author : Yoann LAMY
 # Licence : GPLv2
 
@@ -18,7 +18,7 @@ CMD_GREP="/bin/grep"
 SCRIPTNAME=`$CMD_BASENAME $0`
 
 # Version
-VERSION="1.4"
+VERSION="1.5"
 
 # Plugin return codes
 STATE_OK=0
@@ -154,7 +154,7 @@ if [ $TYPE = "disk" ]; then
   # Check disk state (Usage: ./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t disk -d 1)
   DISK_NAME=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME "${OID_DISK_NAME}.${DISK}" | $CMD_AWK -F '"' '{print $2}'`
   DISK_STATE=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME "${OID_DISK_STATE}.${DISK}"`
-  DESCRIPTION="Etat du disque '${DISK_NAME}' : "
+  DESCRIPTION="Disk status '${DISK_NAME}' : "
   case $DISK_STATE in
     0)
       DESCRIPTION="$DESCRIPTION Unknown"
@@ -205,7 +205,7 @@ if [ $TYPE = "disk" ]; then
       STATE=$STATE_WARNING
       ;;
     28)
-      DESCRIPTION="$DESCRIPTION Diagnosis"
+      DESCRIPTION="$DESCRIPTION Diagnostics"
       STATE=$STATE_WARNING
       ;;
     35)
@@ -221,7 +221,7 @@ elif [ $TYPE = "fan" ]; then
   # Check fans RPM (Usage: ./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t fan)
   TEST=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME ${OID_COOLING_INDEX}.1`;
   if [ -n "$TEST" ]; then
-    DESCRIPTION="Vitesse de rotation des ventilateurs :"
+    DESCRIPTION="Fan rotation speed :"
     for COOLING_ID in `$CMD_SNMPWALK -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME $OID_COOLING_INDEX`; do
       COOLING_NAME=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME ${OID_COOLING_NAME}.${COOLING_ID} | $CMD_AWK -F '"' '{print $2}'`
       COOLING_READING=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME ${OID_COOLING_READING}.${COOLING_ID}`
@@ -234,7 +234,7 @@ elif [ $TYPE = "fan" ]; then
 elif [ $TYPE = "health" ]; then
   # Check global system status (Usage: ./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t health)
   HEALTH_STATUS=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME $OID_GLOBAL_STATUS`
-  DESCRIPTION="Etat general : "
+  DESCRIPTION="General status : "
   case $HEALTH_STATUS in
     1)
       DESCRIPTION="$DESCRIPTION Unknown"
@@ -279,7 +279,7 @@ elif [ $TYPE = "power" ]; then
   if [ -n "$PROBE_POWER_ID" ]; then
     PROBE_POWER_STATUS=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME ${OID_PROBE_POWER_STATUS}.${PROBE_POWER_ID}`
     PROBE_POWER_READING=`$CMD_SNMPGET -t 2 -r 2 -v 1 -c $COMMUNITY -Ovq $HOSTNAME ${OID_PROBE_POWER_READING}.${PROBE_POWER_ID}`
-    DESCRIPTION="Puissance consommee : $PROBE_POWER_READING Watts"
+    DESCRIPTION="Power consumption : $PROBE_POWER_READING Watts"
     case $PROBE_POWER_STATUS in
       1)
         DESCRIPTION="$DESCRIPTION (Unknown)"
@@ -294,11 +294,11 @@ elif [ $TYPE = "power" ]; then
         STATE=$STATE_OK
         ;;
       4)
-        DESCRIPTION="$DESCRIPTION (Critique)"
+        DESCRIPTION="$DESCRIPTION (Critical)"
         STATE=$STATE_CRITICAL
         ;;
       5)
-        DESCRIPTION="$DESCRIPTION (Critique)"
+        DESCRIPTION="$DESCRIPTION (Critical)"
         STATE=$STATE_CRITICAL
         ;;
       6)
