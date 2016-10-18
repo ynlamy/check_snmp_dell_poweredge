@@ -3,12 +3,12 @@ This plugin can check the status of Dell PowerEdge server using SNMP v1 queries 
 check_snmp_dell_poweredge is written in Bash and is distributed under the GPLv2 license. This plugin have been created by Yoann LAMY.
 
 Usage:
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t disk -d 1
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t fan
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t health
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t info
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t redundancy
-./check_snmp_dell_poweredge -H 127.0.0.1 -C public -t temperature -w 30 -c 35
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t disk -d 1
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t fan
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t health
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t info
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t redundancy
+./check_snmp_dell_poweredge -H xxx.xxx.xxx.xxx -C public -t temperature -w 30 -c 35
 
 -H ADDRESS
 Name or IP address of host (default: 127.0.0.1)
