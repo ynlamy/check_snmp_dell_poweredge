@@ -2,23 +2,23 @@
 
 # check_snmp_dell_poweredge
 # Description : Check the status of Dell PowerEdge server
-# Version : 1.5
+# Version : 1.6
 # Author : Yoann LAMY
 # Licence : GPLv2
 
 # Commands
-CMD_BASENAME="/bin/basename"
+CMD_BASENAME="/usr/bin/basename"
 CMD_SNMPGET="/usr/bin/snmpget"
 CMD_SNMPWALK="/usr/bin/snmpwalk"
-CMD_AWK="/bin/awk"
+CMD_AWK="/usr/bin/awk"
 CMD_EXPR="/usr/bin/expr"
-CMD_GREP="/bin/grep"
+CMD_GREP="/usr/bin/grep"
 
 # Script name
 SCRIPTNAME=`$CMD_BASENAME $0`
 
 # Version
-VERSION="1.5"
+VERSION="1.6"
 
 # Plugin return codes
 STATE_OK=0
